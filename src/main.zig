@@ -278,7 +278,7 @@ fn compileShader(shader: c_uint, filename: []const u8) !bool {
 }
 
 fn createVertexShader(program: c_uint) !c_uint {
-    const vertex_shader_filename = "./shaders/vertex.glsl";
+    const vertex_shader_filename = "./shaders/init_vertex.glsl";
     const vertex_shader = gl.CreateShader(gl.VERTEX_SHADER);
     if (vertex_shader == 0) return error.CreateVertexShaderFailed;
     defer gl.DeleteShader(vertex_shader);
@@ -290,7 +290,7 @@ fn createVertexShader(program: c_uint) !c_uint {
 }
 
 fn createFragmentShader(program: c_uint) !c_uint {
-    const fragment_shader_filename = "./shaders/fragment.glsl";
+    const fragment_shader_filename = "./shaders/init_fragment.glsl";
     const fragment_shader = gl.CreateShader(gl.FRAGMENT_SHADER);
     if (fragment_shader == 0) return error.CreateFragmentShaderFailed;
     defer gl.DeleteShader(fragment_shader);
