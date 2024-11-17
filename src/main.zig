@@ -199,12 +199,14 @@ pub fn main() !void {
     var last_inode_frag: u64 = 0;
     var last_inode_vert: u64 = 0;
 
+    var total_time_acc: i64 = 0;
+    var total_time_count: i64 = 0;
     main_loop: while (true) {
+        const start = std.time.microTimestamp();
         glfw.pollEvents();
 
         // Exit the main loop if the user is trying to close the window.
         if (window.shouldClose()) break :main_loop;
-
         {
             if (i == 0) {
                 // TODO recompiles at first run. Not important, can be left as is.
@@ -225,7 +227,7 @@ pub fn main() !void {
                 }
             }
             i = i + 1;
-            if (i == 200) {
+            if (i == 60) {
                 i = 0;
             }
 
@@ -253,6 +255,14 @@ pub fn main() !void {
         }
 
         window.swapBuffers();
+        const total_time = std.time.microTimestamp() - start;
+        total_time_acc += total_time;
+        total_time_count += 1;
+        if (total_time_acc > 1_000_000) {
+            std.debug.print("fps {}\n", .{total_time_count});
+            total_time_acc = 0;
+            total_time_count = 0;
+        }
     }
 }
 
