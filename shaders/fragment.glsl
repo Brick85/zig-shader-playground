@@ -40,6 +40,7 @@ float getSdfDistance(vec3 pos) {
     float sphereDistance2 = getSdfDistanceSphere(pos, vec3(-x, 1.0, 4), 1.0);
     float sphereTotalDistance = smoothMin(sphereDistance, sphereDistance2);
     float distance = smoothMin(ground, sphereTotalDistance);
+    // distance += sin(u_Time) * 0.5;
     return distance;
 }
 
